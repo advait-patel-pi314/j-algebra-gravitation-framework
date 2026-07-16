@@ -1,4 +1,6 @@
 # j-algebra-gravitation-framework
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21321137.svg)](https://doi.org/10.5281/zenodo.2132737)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # A Non-Singular $j$-Algebraic Scalar-Tensor Framework
 
 This repository hosts the preprint manuscript, verification code, and numerical simulations for a modified scalar-tensor gravity theory using a 5th-order nilpotent algebraic extension ($\mathbb{R}[j]/\langle j^5 \rangle$). 
@@ -27,3 +29,18 @@ For the formal ring-theoretic proofs, $5 \times 5$ Toeplitz matrix isomorphism, 
 Ensure you have the standard scientific Python stack installed:
 ```bash
 pip install numpy matplotlib scipy
+```
+## 📌** Citation**
+
+If you use this framework or simulation code in your research, please cite the preprint:
+
+```bibtex
+@article{patel2026jalgebra,
+  author    = {Patel, Advait},
+  title     = {A Non-Singular j-Algebraic Scalar-Tensor Framework},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.21322737},
+  url       = {[https://doi.org/10.5281/zenodo.21321137](https://doi.org/10.5281/zenodo.21322737)}
+}
+```
