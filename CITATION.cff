@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: "A Non-Singular j-Algebraic Scalar-Tensor Framework"
+message: "If you use this software or framework, please cite it as below."
+type: software
+authors:
+  - family-names: "Patel"
+    given-names: "Advait"
+repository-code: "https://github.com/advait-patel-pi314/j-algebra-gravitation-framework"
+date-released: 2026-07-16
+doi: "10.5281/zenodo.21322737"
