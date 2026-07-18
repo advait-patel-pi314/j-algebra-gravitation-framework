@@ -112,24 +112,35 @@ def simulate_hubble_tension(ax):
     ax.grid(True, alpha=0.3)
 
 # =====================================================================
-# ENGINE 4: SOLAR SYSTEM SCREENING MECHANISM (PPN Gamma)
+# ENGINE 4: SOLAR SYSTEM SCREENING MECHANISM (PATCHED)
 # =====================================================================
 def simulate_screening_mechanism(ax):
-    r_AU = np.logspace(-1, 2, 200)  # 0.1 AU to 100 AU
+    r_AU = np.logspace(-1, 2, 200)  # 0.1 AU (inside Mercury) to 100 AU (Deep Space)
     
-    # High mass density inside Solar System suppresses field gamma deviation
-    # Deviation scale drops exponentially inside the screening radius
-    gamma_deviation = 1e-9 * np.exp(-r_AU / 10.0)
+    # Physical parameters for the screening profile
+    gamma_cosmic = 1.5e-5    # Unscreened cosmic background deviation value
+    r_screen = 15.0          # Screening radius threshold in AU (around Saturn's orbit)
+    floor_value = 1e-9       # Deep inner-system screening floor to prevent log(0)
     
+    # Physically accurate screening profile: 
+    # Suppressed at small r (high density), transitions to cosmic value at large r (low density)
+    gamma_deviation = floor_value + gamma_cosmic * (1.0 - np.exp(-r_AU / r_screen))
+    
+    # Plotting the dynamic transition
     ax.semilogy(r_AU, gamma_deviation, 'b-', label=r'j-Tax Deviation $|\gamma - 1|$', linewidth=2)
-    ax.axhline(y=2.3e-5, color='r', linestyle='--', label=r'Cassini Spacecraft Limit ($2.3 \times 10^{-5}$)')
+    ax.axhline(y=2.3e-5, color='r', linestyle='--', label=r'Cassini Spacecraft Limit ($2.3 \times 10^{-5}$)', linewidth=1.5)
+    
+    # Visual markers for Solar System context
+    ax.axvspan(0.1, 1.0, color='orange', alpha=0.07, label='Inner System (Highly Screened)')
+    ax.axvline(x=r_screen, color='gray', linestyle=':', label='Screening Radius ($r_s = 15$ AU)')
     
     ax.set_title('4. Solar System Screening Mechanism', fontsize=12, fontweight='bold')
     ax.set_xlabel('Distance from Sun (AU)')
-    ax.set_ylabel(r'PPN Deviation $|\gamma - 1|$ (Log Scale)')
-    ax.legend(loc='center right')
-    ax.grid(True, alpha=0.3)
-
+    ax.set_ylabel(r'PPN Deviation $|\gamma - 1|$')
+    ax.set_xlim(0.1, 100)
+    ax.set_ylim(1e-9, 1e-4)
+    ax.legend(loc='lower right', fontsize=8)
+    ax.grid(True, which="both", alpha=0.3)
 # =====================================================================
 # EXECUTE ALL SIMULATIONS AND SAVE PLOT
 # =====================================================================
