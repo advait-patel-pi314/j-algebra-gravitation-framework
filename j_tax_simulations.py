@@ -47,11 +47,11 @@ def simulate_galactic_rotation(ax):
     ax.grid(True, alpha=0.3)
 
 # =====================================================================
-# ENGINE 2: M87* BLACK HOLE SHADOW
+# ENGINE 2: M87* BLACK HOLE SHADOW (PATCHED)
 # =====================================================================
 def simulate_black_hole_shadow(ax):
-    M_M87 = 6.5e9 * M_sun    # Mass of M87*
-    D_M87 = 16.8 * 1e6 * Mpc_to_m  # Distance in meters
+    M_M87 = 6.5e9 * M_sun        # Mass of M87*
+    D_M87 = 16.8 * Mpc_to_m      # Cleaned: 16.8 Megaparsecs in meters
     
     r_s = (2 * G * M_M87) / (c**2)
     
@@ -66,19 +66,20 @@ def simulate_black_hole_shadow(ax):
     # Plotting shadow circles
     phi = np.linspace(0, 2*np.pi, 300)
     
-    ax.plot((theta_GR/2) * np.cos(phi), (theta_GR/2) * np.sin(phi), 'r--', label=f'Standard GR ({theta_GR:.1f} $\mu$as)')
-    ax.plot((theta_j/2) * np.cos(phi), (theta_j/2) * np.sin(phi), 'b-', label=f'j-Regularized Horizon ({theta_j:.1f} $\mu$as)')
+    ax.plot((theta_GR/2) * np.cos(phi), (theta_GR/2) * np.sin(phi), 'r--', label=f'Standard GR ({theta_GR:.1f} $\mu$as)', linewidth=2)
+    ax.plot((theta_j/2) * np.cos(phi), (theta_j/2) * np.sin(phi), 'b-', label=f'j-Regularized Horizon ({theta_j:.1f} $\mu$as)', linewidth=2)
     
     # EHT Observational Band overlay (42 +/- 3 mu-as)
-    ax.axvspan(-22.5, 22.5, color='gold', alpha=0.15, label='EHT M87* Observed Range ($42 \pm 3\,\mu$as)')
+    ax.axvspan(-22.5, 22.5, color='gold', alpha=0.15, label=r'EHT M87* Observed Range ($42 \pm 3\,\mu$as)')
     
     ax.set_title('2. M87* Black Hole Shadow Profile', fontsize=12, fontweight='bold')
     ax.set_xlabel(r'Relative Sky Angle $\Delta\theta_x$ ($\mu$as)')
     ax.set_ylabel(r'Relative Sky Angle $\Delta\theta_y$ ($\mu$as)')
+    ax.set_xlim(-30, 30) # Lock limits to see the ring clearly
+    ax.set_ylim(-30, 30)
     ax.set_aspect('equal')
     ax.legend(loc='upper right', fontsize=8)
     ax.grid(True, alpha=0.3)
-
 # =====================================================================
 # ENGINE 3: HUBBLE TENSION RESOLUTION
 # =====================================================================
